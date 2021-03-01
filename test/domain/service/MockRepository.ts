@@ -6,18 +6,31 @@ import { SoundPlayInfos } from '../../../src/domain/model/SoundPlayInfos';
 import { Repository } from '../../../src/domain/repository/Repository';
 
 export class MockRepository implements Repository {
-    playedTime: number;
+    soundPlayInfos: SoundPlayInfos;
 
-    constructor(playedTime: number) {
-        this.playedTime = playedTime;
+    constructor(soundPlayInfos: SoundPlayInfos) {
+        this.soundPlayInfos = soundPlayInfos;
     }
 
-    load(sound: Sound) : number {
-        return this.playedTime;
+    load(sound: Sound) : SoundPlayInfo|undefined {
+        return this.soundPlayInfos.getSoundPlayInfoFromUrl(sound.url);
     }
 
     save(sound: Sound, playedTime: number) : void {
-        this.playedTime = playedTime;
+        const soundPlayInfo = this.soundPlayInfos.getSoundPlayInfoFromUrl(sound.url);
+        if (soundPlayInfo) {
+            soundPlayInfo.playedTime = playedTime;
+        } else {
+            throw new Error(`${sound.toString()} が見つかりませんでした。`);
+        }
+    }
+
+    loadAll(): SoundPlayInfos {
+        return new SoundPlayInfos([]);
+    }
+
+    saveAll(soundPlayInfos: SoundPlayInfos): void {
+        // do nothing
     }
 }
 

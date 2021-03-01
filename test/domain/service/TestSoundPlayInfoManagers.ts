@@ -3,6 +3,8 @@ import { assert } from "chai"
 
 import { Sound } from '../../../src/domain/model/Sound';
 import { Sounds } from '../../../src/domain/model/Sounds';
+import { SoundPlayInfo } from '../../../src/domain/model/SoundPlayInfo';
+import { SoundPlayInfos } from '../../../src/domain/model/SoundPlayInfos';
 import { SoundPlayInfoManagers } from '../../../src/domain/service/SoundPlayInfoManagers';
 
 import { Repository } from '../../../src/domain/repository/Repository';
@@ -15,7 +17,11 @@ describe('SoundPlayInfoManagers.ts', () => {
             Sound.createFromString("sound2", "file:///path/to/sound2"),
             Sound.createFromString("sound3", "file:///path/to/sound3")
         ]);
-        const repository = new MockRepository(1.25);
+
+        const soundPlayInfos = new SoundPlayInfos(sounds.map(sound => {
+            return new SoundPlayInfo(sound, 1.25);
+        }));
+        const repository = new MockRepository(soundPlayInfos);
 
         const soundPlayInfoManagers = new SoundPlayInfoManagers(sounds, repository);
 

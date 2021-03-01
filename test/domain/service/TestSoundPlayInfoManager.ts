@@ -2,6 +2,8 @@ import { describe, it } from "mocha";
 import { assert } from "chai"
 
 import { Sound } from '../../../src/domain/model/Sound';
+import { SoundPlayInfo } from '../../../src/domain/model/SoundPlayInfo';
+import { SoundPlayInfos } from '../../../src/domain/model/SoundPlayInfos';
 import { SoundPlayInfoManager } from '../../../src/domain/service/SoundPlayInfoManager';
 
 import { Repository } from '../../../src/domain/repository/Repository';
@@ -10,7 +12,9 @@ import { MockRepository } from './MockRepository';
 describe('SoundPlayInfoManager.ts', () => {
     it('インスタンス化', () => {
         const sound = Sound.createFromString("sound1", "file:///path/to/sound1");
-        const repository = new MockRepository(1.25);
+        const repository = new MockRepository(new SoundPlayInfos([
+            new SoundPlayInfo(sound, 1.25)
+        ]));
 
         const soundPlayInfoManager = new SoundPlayInfoManager(sound, repository);
 
@@ -19,9 +23,11 @@ describe('SoundPlayInfoManager.ts', () => {
         assert.equal(soundPlayInfoManager.playedTime, 1.25);
     });
 
-    it('save/load', () => {
+    it('save', () => {
         const sound = Sound.createFromString("sound1", "file:///path/to/sound1");
-        const repository = new MockRepository(1.25);
+        const repository = new MockRepository(new SoundPlayInfos([
+            new SoundPlayInfo(sound, 1.25)
+        ]));
 
         const soundPlayInfoManager = new SoundPlayInfoManager(sound, repository);
         soundPlayInfoManager.playedTime = 2;
@@ -31,10 +37,12 @@ describe('SoundPlayInfoManager.ts', () => {
 
     it('load', () => {
         const sound = Sound.createFromString("sound1", "file:///path/to/sound1");
-        const repository = new MockRepository(1.25);
+        const repository = new MockRepository(new SoundPlayInfos([
+            new SoundPlayInfo(sound, 1.25)
+        ]));
 
         const soundPlayInfoManager = new SoundPlayInfoManager(sound, repository);
-        repository.playedTime = 3;
+        repository.soundPlayInfos.getSoundPlayInfo(0).playedTime = 3;
         soundPlayInfoManager.load();
         assert.equal(soundPlayInfoManager.playedTime, 3);
     });

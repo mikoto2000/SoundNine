@@ -8,7 +8,7 @@ export class SoundPlayInfoManager {
 
   constructor(sound: Sound, repository: Repository) {
       this.repository = repository;
-      const playedTime = this.repository.load(sound);
+      const playedTime = this.repository.load(sound).playedTime;
 
       this.soundPlayInfo = new SoundPlayInfo(sound, playedTime);
   }
@@ -30,7 +30,7 @@ export class SoundPlayInfoManager {
   }
 
   load(): void {
-      this.soundPlayInfo.playedTime = this.repository.load(this.soundPlayInfo.sound);
+      this.soundPlayInfo.playedTime = this.repository.load(this.soundPlayInfo.sound).playedTime;
   }
 
   save(): void {
