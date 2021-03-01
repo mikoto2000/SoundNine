@@ -9,10 +9,12 @@ import { Repository } from '../repository/Repository';
 
 export class SoundPlayInfoManagers {
   readonly soundPlayInfoManagers: SoundPlayInfoManager[];
+  readonly soundPlayInfos: SoundPlayInfos;
   readonly repository: Repository;
 
   constructor(soundPlayInfos: SoundPlayInfos, repository: Repository) {
       this.repository = repository;
+      this.soundPlayInfos = soundPlayInfos;
       this.soundPlayInfoManagers = soundPlayInfos.map(soundPlayInfo => {
           return new SoundPlayInfoManager(soundPlayInfo, repository);
       });
@@ -24,6 +26,10 @@ export class SoundPlayInfoManagers {
 
   get length(): number {
       return this.soundPlayInfoManagers.length;
+  }
+
+  saveAll(): void {
+      this.repository.saveAll(this.soundPlayInfos);
   }
 
   static createFromRepository(repository: Repository) : SoundPlayInfoManagers {

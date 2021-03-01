@@ -14,8 +14,8 @@ describe('SoundPlayInfoManagers.ts', () => {
     it('インスタンス化', () => {
         const soundPlayInfos = new SoundPlayInfos([
             new SoundPlayInfo(Sound.createFromString("sound1", "file:///path/to/sound1"), 1.25),
-            new SoundPlayInfo(Sound.createFromString("sound2", "file:///path/to/sound2"), 1.25),
-            new SoundPlayInfo(Sound.createFromString("sound3", "file:///path/to/sound3"), 1.25)
+            new SoundPlayInfo(Sound.createFromString("sound2", "file:///path/to/sound2"), 2.25),
+            new SoundPlayInfo(Sound.createFromString("sound3", "file:///path/to/sound3"), 3.25)
         ]);
 
         const repository = new MockRepository(soundPlayInfos);
@@ -30,11 +30,41 @@ describe('SoundPlayInfoManagers.ts', () => {
 
         assert.equal(soundPlayInfoManagers.getSoundPlayInfoManager(1).soundName, "sound2");
         assert.equal(soundPlayInfoManagers.getSoundPlayInfoManager(1).soundUrl.toString(), "file:///path/to/sound2");
-        assert.equal(soundPlayInfoManagers.getSoundPlayInfoManager(1).playedTime, 1.25);
+        assert.equal(soundPlayInfoManagers.getSoundPlayInfoManager(1).playedTime, 2.25);
 
         assert.equal(soundPlayInfoManagers.getSoundPlayInfoManager(2).soundName, "sound3");
         assert.equal(soundPlayInfoManagers.getSoundPlayInfoManager(2).soundUrl.toString(), "file:///path/to/sound3");
-        assert.equal(soundPlayInfoManagers.getSoundPlayInfoManager(2).playedTime, 1.25);
+        assert.equal(soundPlayInfoManagers.getSoundPlayInfoManager(2).playedTime, 3.25);
+    });
+
+    it('saveAll', () => {
+        const soundPlayInfos = new SoundPlayInfos([
+            new SoundPlayInfo(Sound.createFromString("sound1", "file:///path/to/sound1"), 1.25),
+            new SoundPlayInfo(Sound.createFromString("sound2", "file:///path/to/sound2"), 1.25),
+            new SoundPlayInfo(Sound.createFromString("sound3", "file:///path/to/sound3"), 1.25)
+        ]);
+
+        const repository = new MockRepository(soundPlayInfos);
+
+        const soundPlayInfoManagers = SoundPlayInfoManagers.createFromRepository(repository);
+        soundPlayInfoManagers.getSoundPlayInfoManager(0).playedTime = 125;
+        soundPlayInfoManagers.getSoundPlayInfoManager(1).playedTime = 225;
+        soundPlayInfoManagers.getSoundPlayInfoManager(2).playedTime = 325;
+        soundPlayInfoManagers.saveAll();
+
+        assert.equal(soundPlayInfoManagers.length, 3);
+
+        assert.equal(soundPlayInfoManagers.getSoundPlayInfoManager(0).soundName, "sound1");
+        assert.equal(soundPlayInfoManagers.getSoundPlayInfoManager(0).soundUrl.toString(), "file:///path/to/sound1");
+        assert.equal(soundPlayInfoManagers.getSoundPlayInfoManager(0).playedTime, 125);
+
+        assert.equal(soundPlayInfoManagers.getSoundPlayInfoManager(1).soundName, "sound2");
+        assert.equal(soundPlayInfoManagers.getSoundPlayInfoManager(1).soundUrl.toString(), "file:///path/to/sound2");
+        assert.equal(soundPlayInfoManagers.getSoundPlayInfoManager(1).playedTime, 225);
+
+        assert.equal(soundPlayInfoManagers.getSoundPlayInfoManager(2).soundName, "sound3");
+        assert.equal(soundPlayInfoManagers.getSoundPlayInfoManager(2).soundUrl.toString(), "file:///path/to/sound3");
+        assert.equal(soundPlayInfoManagers.getSoundPlayInfoManager(2).playedTime, 325);
     });
 })
 
