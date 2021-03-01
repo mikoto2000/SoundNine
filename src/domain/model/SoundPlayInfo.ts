@@ -8,5 +8,14 @@ export class SoundPlayInfo {
       this.sound = sound;
       this.playedTime = playedTime;
   }
+
+  get soundName(): string {
+      return this.sound.name;
+  }
+
+  get soundUrl(): URL {
+      return this.sound.url;
+  }
+
 }
 
