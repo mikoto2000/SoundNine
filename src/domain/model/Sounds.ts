@@ -10,5 +10,9 @@ export class Sounds {
   getSound(index : number) : Sound {
       return this.sounds[index];
   }
+
+  map<T>(func: (sound:Sound)=>T): T[] {
+      return this.sounds.map(func);
+  }
 }
 
