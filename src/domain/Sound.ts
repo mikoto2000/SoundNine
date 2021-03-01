@@ -6,5 +6,13 @@ export class Sound {
       this.name = name;
       this.url = new URL(url.toString());
   }
+
+  static createFromURL(name: string, url: URL) {
+      return new Sound(name, url);
+  }
+
+  static createFromString(name: string, url: string) {
+      return new Sound(name, new URL(url));
+  }
 }
 
