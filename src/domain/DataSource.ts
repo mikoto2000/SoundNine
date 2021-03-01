@@ -12,5 +12,13 @@ export class DataSource {
       this.url = new URL(url.toString());
       this.sounds = sounds;
   }
+
+  static createFromURL(name: string, type: string, url: URL, sounds: Sounds) {
+      return new DataSource(name, type, url, sounds);
+  }
+
+  static createFromString(name: string, type: string, url: string, sounds: Sounds) {
+      return new DataSource(name, type, new URL(url), sounds);
+  }
 }
 
