@@ -1,9 +1,9 @@
 import { describe, it } from "mocha";
 import { assert } from "chai"
 
-import { Sound } from '../src/domain/Sound';
-import { Sounds } from '../src/domain/Sounds';
-import { DataSource } from '../src/domain/DataSource';
+import { Sound } from '../../../src/domain/model/Sound';
+import { Sounds } from '../../../src/domain/model/Sounds';
+import { DataSource } from '../../../src/domain/model/DataSource';
 
 describe('DataSource.ts', () => {
     describe('インスタンス化', () => {

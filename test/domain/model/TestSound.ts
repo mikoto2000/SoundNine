@@ -1,7 +1,7 @@
 import { describe, it } from "mocha";
 import { assert } from "chai"
 
-import { Sound } from '../src/domain/Sound';
+import { Sound } from '../../../src/domain/model/Sound';
 
 describe('Sound.ts', () => {
     describe('インスタンス化', () => {
