@@ -1,0 +1,22 @@
+{
+  "name": "soundnine",
+  "version": "0.1.0",
+  "description": "Sound play manager.",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikoto2000/SoundNine.git"
+  },
+  "author": "mikoto2000",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mikoto2000/SoundNine/issues"
+  },
+  "homepage": "https://github.com/mikoto2000/SoundNine#readme"
+}
