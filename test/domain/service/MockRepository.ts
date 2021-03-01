@@ -26,7 +26,7 @@ export class MockRepository implements Repository {
     }
 
     loadAll(): SoundPlayInfos {
-        return new SoundPlayInfos([]);
+        return this.soundPlayInfos;
     }
 
     saveAll(soundPlayInfos: SoundPlayInfos): void {

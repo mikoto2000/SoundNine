@@ -1,6 +1,7 @@
 import { Sound } from '../model/Sound';
 import { Sounds } from '../model/Sounds';
 import { SoundPlayInfo } from '../model/SoundPlayInfo';
+import { SoundPlayInfos } from '../model/SoundPlayInfos';
 
 import { SoundPlayInfoManager } from './SoundPlayInfoManager';
 
@@ -10,10 +11,10 @@ export class SoundPlayInfoManagers {
   readonly soundPlayInfoManagers: SoundPlayInfoManager[];
   readonly repository: Repository;
 
-  constructor(sounds: Sounds, repository: Repository) {
+  constructor(soundPlayInfos: SoundPlayInfos, repository: Repository) {
       this.repository = repository;
-      this.soundPlayInfoManagers = sounds.map(sound => {
-          return new SoundPlayInfoManager(sound, repository);
+      this.soundPlayInfoManagers = soundPlayInfos.map(soundPlayInfo => {
+          return new SoundPlayInfoManager(soundPlayInfo, repository);
       });
   }
 
@@ -23,6 +24,11 @@ export class SoundPlayInfoManagers {
 
   get length(): number {
       return this.soundPlayInfoManagers.length;
+  }
+
+  static createFromRepository(repository: Repository) : SoundPlayInfoManagers {
+      const soundPlayInfos = repository.loadAll();
+      return new SoundPlayInfoManagers(soundPlayInfos, repository);
   }
 }
 

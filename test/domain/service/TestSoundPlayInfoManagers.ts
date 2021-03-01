@@ -12,18 +12,15 @@ import { MockRepository } from './MockRepository';
 
 describe('SoundPlayInfoManagers.ts', () => {
     it('インスタンス化', () => {
-        const sounds = new Sounds([
-            Sound.createFromString("sound1", "file:///path/to/sound1"),
-            Sound.createFromString("sound2", "file:///path/to/sound2"),
-            Sound.createFromString("sound3", "file:///path/to/sound3")
+        const soundPlayInfos = new SoundPlayInfos([
+            new SoundPlayInfo(Sound.createFromString("sound1", "file:///path/to/sound1"), 1.25),
+            new SoundPlayInfo(Sound.createFromString("sound2", "file:///path/to/sound2"), 1.25),
+            new SoundPlayInfo(Sound.createFromString("sound3", "file:///path/to/sound3"), 1.25)
         ]);
 
-        const soundPlayInfos = new SoundPlayInfos(sounds.map(sound => {
-            return new SoundPlayInfo(sound, 1.25);
-        }));
         const repository = new MockRepository(soundPlayInfos);
 
-        const soundPlayInfoManagers = new SoundPlayInfoManagers(sounds, repository);
+        const soundPlayInfoManagers = SoundPlayInfoManagers.createFromRepository(repository);
 
         assert.equal(soundPlayInfoManagers.length, 3);
 

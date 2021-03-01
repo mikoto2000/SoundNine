@@ -6,11 +6,9 @@ export class SoundPlayInfoManager {
   readonly soundPlayInfo: SoundPlayInfo;
   readonly repository: Repository;
 
-  constructor(sound: Sound, repository: Repository) {
+  constructor(soundPlayInfo: SoundPlayInfo, repository: Repository) {
       this.repository = repository;
-      const playedTime = this.repository.load(sound).playedTime;
-
-      this.soundPlayInfo = new SoundPlayInfo(sound, playedTime);
+      this.soundPlayInfo = soundPlayInfo;
   }
 
   get soundName(): string {
@@ -36,5 +34,15 @@ export class SoundPlayInfoManager {
   save(): void {
       this.repository.save(this.soundPlayInfo.sound, this.soundPlayInfo.playedTime);
   }
+
+  static createFromRepository(sound: Sound, repository: Repository) : SoundPlayInfoManager {
+      const soundPlayInfo = repository.load(sound);
+      if (soundPlayInfo) {
+          return new SoundPlayInfoManager(soundPlayInfo, repository);
+      } else {
+          throw new Error(`${sound}が見つかりませんでした。`);
+      }
+  }
+
 }
 

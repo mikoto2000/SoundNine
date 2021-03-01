@@ -21,6 +21,10 @@ export class SoundPlayInfos {
   get length() : number {
       return this.soundPlayInfos.length;
   }
+
+  map<T>(func: (soundPlayInfo:SoundPlayInfo)=>T): T[] {
+      return this.soundPlayInfos.map(func);
+  }
 }
 
 
