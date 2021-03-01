@@ -6,13 +6,20 @@ import { Sounds } from '../src/domain/Sounds';
 
 describe('Sounds.ts', () => {
     it('インスタンス化', () => {
-        let url = new URL("file:///path/to/sound");
-        let sound = new Sound("name", url);
+        let sounds = new Sounds([
+            Sound.createFromString("sound1", "file:///path/to/sound1"),
+            Sound.createFromString("sound2", "file:///path/to/sound2"),
+            Sound.createFromString("sound3", "file:///path/to/sound3"),
+        ]);
 
-        let sounds = new Sounds([sound]);
+        assert.equal(sounds.getSound(0).name, "sound1");
+        assert.equal(sounds.getSound(0).url.toString(), "file:///path/to/sound1");
 
-        assert.equal(sounds.getSound(0).name, "name");
-        assert.equal(sounds.getSound(0).url.toString(), url.toString());
+        assert.equal(sounds.getSound(1).name, "sound2");
+        assert.equal(sounds.getSound(1).url.toString(), "file:///path/to/sound2");
+
+        assert.equal(sounds.getSound(2).name, "sound3");
+        assert.equal(sounds.getSound(2).url.toString(), "file:///path/to/sound3");
     });
 })
 
