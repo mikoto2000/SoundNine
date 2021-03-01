@@ -8,10 +8,10 @@ import { DataSources } from '../../../src/domain/model/DataSources';
 
 describe('DataSources.ts', () => {
     it('インスタンス化', () => {
-        let url = new URL("file:///path/to/sound");
-        let sound = new Sound("name", url);
+        const url = new URL("file:///path/to/sound");
+        const sound = new Sound("name", url);
 
-        let dataSources = new DataSources([
+        const dataSources = new DataSources([
             DataSource.createFromString(
                 "dataSource1",
                 "directory",

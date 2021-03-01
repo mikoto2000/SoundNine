@@ -8,17 +8,17 @@ import { DataSource } from '../../../src/domain/model/DataSource';
 describe('DataSource.ts', () => {
     describe('インスタンス化', () => {
         it('constructor', () => {
-            let name = "datasource";
-            let type = "datasource type";
-            let url = new URL("file:///path/to/datasource");
+            const name = "datasource";
+            const type = "datasource type";
+            const url = new URL("file:///path/to/datasource");
 
-            let sounds = new Sounds([
+            const sounds = new Sounds([
                 Sound.createFromString("sound1", "file:///path/to/sound1"),
                 Sound.createFromString("sound2", "file:///path/to/sound2"),
                 Sound.createFromString("sound3", "file:///path/to/sound3"),
             ]);
 
-            let dataSource = new DataSource(name, type, url, sounds);
+            const dataSource = new DataSource(name, type, url, sounds);
 
             assert.equal(dataSource.name, name);
             assert.equal(dataSource.type, type);
@@ -35,17 +35,17 @@ describe('DataSource.ts', () => {
         });
 
         it('createFromURL', () => {
-            let name = "datasource";
-            let type = "datasource type";
-            let url = new URL("file:///path/to/datasource");
+            const name = "datasource";
+            const type = "datasource type";
+            const url = new URL("file:///path/to/datasource");
 
-            let sounds = new Sounds([
+            const sounds = new Sounds([
                 Sound.createFromString("sound1", "file:///path/to/sound1"),
                 Sound.createFromString("sound2", "file:///path/to/sound2"),
                 Sound.createFromString("sound3", "file:///path/to/sound3"),
             ]);
 
-            let dataSource = DataSource.createFromURL(name, type, url, sounds);
+            const dataSource = DataSource.createFromURL(name, type, url, sounds);
 
             assert.equal(dataSource.name, name);
             assert.equal(dataSource.type, type);
@@ -62,17 +62,17 @@ describe('DataSource.ts', () => {
         });
 
         it('createFromString', () => {
-            let name = "datasource";
-            let type = "datasource type";
-            let url = "file:///path/to/datasource";
+            const name = "datasource";
+            const type = "datasource type";
+            const url = "file:///path/to/datasource";
 
-            let sounds = new Sounds([
+            const sounds = new Sounds([
                 Sound.createFromString("sound1", "file:///path/to/sound1"),
                 Sound.createFromString("sound2", "file:///path/to/sound2"),
                 Sound.createFromString("sound3", "file:///path/to/sound3"),
             ]);
 
-            let dataSource = DataSource.createFromString(name, type, url, sounds);
+            const dataSource = DataSource.createFromString(name, type, url, sounds);
 
             assert.equal(dataSource.name, name);
             assert.equal(dataSource.type, type);

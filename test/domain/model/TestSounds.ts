@@ -6,7 +6,7 @@ import { Sounds } from '../../../src/domain/model/Sounds';
 
 describe('Sounds.ts', () => {
     it('インスタンス化', () => {
-        let sounds = new Sounds([
+        const sounds = new Sounds([
             Sound.createFromString("sound1", "file:///path/to/sound1"),
             Sound.createFromString("sound2", "file:///path/to/sound2"),
             Sound.createFromString("sound3", "file:///path/to/sound3"),
