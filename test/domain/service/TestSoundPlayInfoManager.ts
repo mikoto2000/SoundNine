@@ -14,9 +14,9 @@ describe('SoundPlayInfoManager.ts', () => {
 
         const soundPlayInfoManager = new SoundPlayInfoManager(sound, repository);
 
-        assert.equal(soundPlayInfoManager.soundPlayInfo.sound.name, "sound1");
-        assert.equal(soundPlayInfoManager.soundPlayInfo.sound.url.toString(), "file:///path/to/sound1");
-        assert.equal(soundPlayInfoManager.soundPlayInfo.playedTime, 1.25);
+        assert.equal(soundPlayInfoManager.soundName, "sound1");
+        assert.equal(soundPlayInfoManager.soundUrl.toString(), "file:///path/to/sound1");
+        assert.equal(soundPlayInfoManager.playedTime, 1.25);
     });
 
     it('save/load', () => {
@@ -24,9 +24,9 @@ describe('SoundPlayInfoManager.ts', () => {
         const repository = new MockRepository(1.25);
 
         const soundPlayInfoManager = new SoundPlayInfoManager(sound, repository);
-        soundPlayInfoManager.soundPlayInfo.playedTime = 2;
+        soundPlayInfoManager.playedTime = 2;
         soundPlayInfoManager.save();
-        assert.equal(soundPlayInfoManager.soundPlayInfo.playedTime, 2);
+        assert.equal(soundPlayInfoManager.playedTime, 2);
     });
 
     it('load', () => {
@@ -36,7 +36,7 @@ describe('SoundPlayInfoManager.ts', () => {
         const soundPlayInfoManager = new SoundPlayInfoManager(sound, repository);
         repository.playedTime = 3;
         soundPlayInfoManager.load();
-        assert.equal(soundPlayInfoManager.soundPlayInfo.playedTime, 3);
+        assert.equal(soundPlayInfoManager.playedTime, 3);
     });
 })
 
