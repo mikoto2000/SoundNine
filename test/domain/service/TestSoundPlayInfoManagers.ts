@@ -3,11 +3,10 @@ import { assert } from "chai"
 
 import { Sound } from '../../../src/domain/model/Sound';
 import { Sounds } from '../../../src/domain/model/Sounds';
-import { SoundPlayInfo } from '../../../src/domain/model/SoundPlayInfo';
-import { SoundPlayInfoManager } from '../../../src/domain/service/SoundPlayInfoManager';
 import { SoundPlayInfoManagers } from '../../../src/domain/service/SoundPlayInfoManagers';
 
 import { Repository } from '../../../src/domain/repository/Repository';
+import { MockRepository } from './MockRepository';
 
 describe('SoundPlayInfoManagers.ts', () => {
     it('インスタンス化', () => {
@@ -35,21 +34,4 @@ describe('SoundPlayInfoManagers.ts', () => {
         assert.equal(soundPlayInfoManagers.getSoundPlayInfoManager(2).playedTime, 1.25);
     });
 })
-
-class MockRepository implements Repository {
-    playedTime: number;
-
-    constructor(playedTime: number) {
-        this.playedTime = playedTime;
-    }
-
-    load(sound: Sound) : number {
-        return this.playedTime;
-    }
-
-    save(sound: Sound, playedTime: number) : void {
-        this.playedTime = playedTime;
-    }
-}
-
 

@@ -2,10 +2,10 @@ import { describe, it } from "mocha";
 import { assert } from "chai"
 
 import { Sound } from '../../../src/domain/model/Sound';
-import { SoundPlayInfo } from '../../../src/domain/model/SoundPlayInfo';
 import { SoundPlayInfoManager } from '../../../src/domain/service/SoundPlayInfoManager';
 
 import { Repository } from '../../../src/domain/repository/Repository';
+import { MockRepository } from './MockRepository';
 
 describe('SoundPlayInfoManager.ts', () => {
     it('インスタンス化', () => {
@@ -39,20 +39,4 @@ describe('SoundPlayInfoManager.ts', () => {
         assert.equal(soundPlayInfoManager.playedTime, 3);
     });
 })
-
-class MockRepository implements Repository {
-    playedTime: number;
-
-    constructor(playedTime: number) {
-        this.playedTime = playedTime;
-    }
-
-    load(sound: Sound) : number {
-        return this.playedTime;
-    }
-
-    save(sound: Sound, playedTime: number) : void {
-        this.playedTime = playedTime;
-    }
-}
 
