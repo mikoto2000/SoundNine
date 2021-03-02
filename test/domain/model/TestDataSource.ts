@@ -20,6 +20,8 @@ describe('DataSource.ts', () => {
 
             const dataSource = new DataSource(name, type, url, sounds);
 
+            assert.equal(dataSource.length, 3);
+
             assert.equal(dataSource.name, name);
             assert.equal(dataSource.type, type);
             assert.equal(dataSource.url.toString(), url.toString());
@@ -47,6 +49,8 @@ describe('DataSource.ts', () => {
 
             const dataSource = DataSource.createFromURL(name, type, url, sounds);
 
+            assert.equal(dataSource.length, 3);
+
             assert.equal(dataSource.name, name);
             assert.equal(dataSource.type, type);
             assert.equal(dataSource.url.toString(), url.toString());
@@ -73,6 +77,8 @@ describe('DataSource.ts', () => {
             ]);
 
             const dataSource = DataSource.createFromString(name, type, url, sounds);
+
+            assert.equal(dataSource.length, 3);
 
             assert.equal(dataSource.name, name);
             assert.equal(dataSource.type, type);

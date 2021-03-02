@@ -13,6 +13,10 @@ export class DataSource {
       this.sounds = sounds;
   }
 
+  get length(): number {
+      return this.sounds.length;
+  }
+
   static createFromURL(name: string, type: string, url: URL, sounds: Sounds) {
       return new DataSource(name, type, url, sounds);
   }
