@@ -12,6 +12,8 @@ describe('Sounds.ts', () => {
             Sound.createFromString("sound3", "file:///path/to/sound3"),
         ]);
 
+        assert.equal(sounds.length, 3);
+
         assert.equal(sounds.getSound(0).name, "sound1");
         assert.equal(sounds.getSound(0).url.toString(), "file:///path/to/sound1");
 
