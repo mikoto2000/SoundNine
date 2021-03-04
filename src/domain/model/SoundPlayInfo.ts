@@ -13,7 +13,7 @@ export class SoundPlayInfo {
       return this.sound.name;
   }
 
-  get soundUrl(): URL {
+  get soundUrl(): string {
       return this.sound.url;
   }
 

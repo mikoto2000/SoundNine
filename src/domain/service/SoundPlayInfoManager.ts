@@ -15,7 +15,7 @@ export class SoundPlayInfoManager {
       return this.soundPlayInfo.sound.name;
   }
 
-  get soundUrl(): URL {
+  get soundUrl():  string {
       return this.soundPlayInfo.sound.url;
   }
 

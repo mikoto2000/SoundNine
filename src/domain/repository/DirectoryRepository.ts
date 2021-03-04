@@ -16,7 +16,7 @@ export class DirectoryRepository implements Repository {
         const files = children.filter(child => child.isFile()).map(file => file.name);
 
         this.soundPlayInfos = new SoundPlayInfos(files.map(file => {
-            return new SoundPlayInfo(Sound.createFromString(file, 'file:///' + path.resolve(directory) + '/' + file), 0);
+            return new SoundPlayInfo(new Sound(file, 'file://' + path.resolve(directory) + '/' + file), 0);
         }));
     }
 

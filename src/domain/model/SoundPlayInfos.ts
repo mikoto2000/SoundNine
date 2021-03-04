@@ -12,7 +12,7 @@ export class SoundPlayInfos {
       return this.soundPlayInfos[index];
   }
 
-  getSoundPlayInfoFromUrl(url : URL) : SoundPlayInfo|undefined {
+  getSoundPlayInfoFromUrl(url :  string) : SoundPlayInfo|undefined {
       return this.soundPlayInfos.find(soundPlayInfo => {
           return soundPlayInfo.soundUrl === url;
       });

@@ -11,7 +11,7 @@ import { MockRepository } from './MockRepository';
 
 describe('SoundPlayInfoManager.ts', () => {
     it('インスタンス化', () => {
-        const sound = Sound.createFromString("sound1", "file:///path/to/sound1");
+        const sound = new Sound("sound1", "file:///path/to/sound1");
         const repository = new MockRepository(new SoundPlayInfos([
             new SoundPlayInfo(sound, 1.25)
         ]));
@@ -24,7 +24,7 @@ describe('SoundPlayInfoManager.ts', () => {
     });
 
     it('save', () => {
-        const sound = Sound.createFromString("sound1", "file:///path/to/sound1");
+        const sound = new Sound("sound1", "file:///path/to/sound1");
         const repository = new MockRepository(new SoundPlayInfos([
             new SoundPlayInfo(sound, 1.25)
         ]));
@@ -36,7 +36,7 @@ describe('SoundPlayInfoManager.ts', () => {
     });
 
     it('load', () => {
-        const sound = Sound.createFromString("sound1", "file:///path/to/sound1");
+        const sound = new Sound("sound1", "file:///path/to/sound1");
         const repository = new MockRepository(new SoundPlayInfos([
             new SoundPlayInfo(sound, 1.25)
         ]));

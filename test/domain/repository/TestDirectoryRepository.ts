@@ -6,7 +6,7 @@ import { assert } from "chai"
 import { Repository } from '../../../src/domain/repository/Repository';
 import { DirectoryRepository } from '../../../src/domain/repository/DirectoryRepository';
 
-describe('SoundPlayInfoManager.ts', () => {
+describe('DirectoryRepository.ts', () => {
     it('インスタンス化', () => {
         const directoryRepository = new DirectoryRepository('./test/testdata/DirectoryRepository');
         const absDirPath = path.resolve('./test/testdata/DirectoryRepository');
