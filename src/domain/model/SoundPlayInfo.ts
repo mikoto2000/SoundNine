@@ -1,21 +1,12 @@
-import { Sound } from '../model/Sound';
-
 export class SoundPlayInfo {
-  readonly sound: Sound;
+  readonly name: string;
+  readonly url: string;
   playedTime: number;
 
-  constructor(sound: Sound, playedTime: number) {
-      this.sound = sound;
+  constructor(name: string, url: string, playedTime: number) {
+      this.name = name;
+      this.url = url;
       this.playedTime = playedTime;
   }
-
-  get soundName(): string {
-      return this.sound.name;
-  }
-
-  get soundUrl(): string {
-      return this.sound.url;
-  }
-
 }
 

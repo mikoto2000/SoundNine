@@ -1,7 +1,6 @@
 import fs from 'fs'
 import path from 'path'
 
-import { Sound } from '../model/Sound';
 import { SoundPlayInfo } from '../model/SoundPlayInfo';
 import { SoundPlayInfos } from '../model/SoundPlayInfos';
 
@@ -16,15 +15,15 @@ export class DirectoryRepository implements Repository {
         const files = children.filter(child => child.isFile()).map(file => file.name);
 
         this.soundPlayInfos = new SoundPlayInfos(files.map(file => {
-            return new SoundPlayInfo(new Sound(file, 'file://' + path.resolve(directory) + '/' + file), 0);
+            return new SoundPlayInfo(file, 'file://' + path.resolve(directory) + '/' + file, 0);
         }));
     }
 
-    load(sound: Sound) : SoundPlayInfo|undefined {
+    load(sound: SoundPlayInfo) : SoundPlayInfo|undefined {
         return undefined;
     }
 
-    save(sound: Sound, playedTime: number) : void {
+    save(sound: SoundPlayInfo, playedTime: number) : void {
     }
 
     loadAll() : SoundPlayInfos {

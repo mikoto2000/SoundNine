@@ -1,7 +1,6 @@
 import { describe, it } from "mocha";
 import { assert } from "chai"
 
-import { Sound } from '../../../src/domain/model/Sound';
 import { SoundPlayInfo } from '../../../src/domain/model/SoundPlayInfo';
 import { SoundPlayInfos } from '../../../src/domain/model/SoundPlayInfos';
 import { SoundPlayInfoManager } from '../../../src/domain/service/SoundPlayInfoManager';
@@ -11,40 +10,59 @@ import { MockRepository } from './MockRepository';
 
 describe('SoundPlayInfoManager.ts', () => {
     it('インスタンス化', () => {
-        const sound = new Sound("sound1", "file:///path/to/sound1");
-        const repository = new MockRepository(new SoundPlayInfos([
-            new SoundPlayInfo(sound, 1.25)
-        ]));
+        const soundPlayInfos = new SoundPlayInfos([
+            new SoundPlayInfo("sound1", "file:///path/to/sound1", 1.25),
+            new SoundPlayInfo("sound2", "file:///path/to/sound2", 2.25),
+            new SoundPlayInfo("sound3", "file:///path/to/sound3", 3.25)
+        ]);
 
-        const soundPlayInfoManager = SoundPlayInfoManager.createFromRepository(sound, repository);
+        const repository = new MockRepository(soundPlayInfos);
 
-        assert.equal(soundPlayInfoManager.soundName, "sound1");
-        assert.equal(soundPlayInfoManager.soundUrl.toString(), "file:///path/to/sound1");
-        assert.equal(soundPlayInfoManager.playedTime, 1.25);
+        const soundPlayInfoManager = SoundPlayInfoManager.createFromRepository(repository);
+
+        assert.equal(soundPlayInfoManager.length, 3);
+
+        assert.equal(soundPlayInfoManager.get(0).name, "sound1");
+        assert.equal(soundPlayInfoManager.get(0).url, "file:///path/to/sound1");
+        assert.equal(soundPlayInfoManager.get(0).playedTime, 1.25);
+
+        assert.equal(soundPlayInfoManager.get(1).name, "sound2");
+        assert.equal(soundPlayInfoManager.get(1).url, "file:///path/to/sound2");
+        assert.equal(soundPlayInfoManager.get(1).playedTime, 2.25);
+
+        assert.equal(soundPlayInfoManager.get(2).name, "sound3");
+        assert.equal(soundPlayInfoManager.get(2).url, "file:///path/to/sound3");
+        assert.equal(soundPlayInfoManager.get(2).playedTime, 3.25);
     });
 
-    it('save', () => {
-        const sound = new Sound("sound1", "file:///path/to/sound1");
-        const repository = new MockRepository(new SoundPlayInfos([
-            new SoundPlayInfo(sound, 1.25)
-        ]));
+    it('saveAll', () => {
+        const soundPlayInfos = new SoundPlayInfos([
+            new SoundPlayInfo("sound1", "file:///path/to/sound1", 1.25),
+            new SoundPlayInfo("sound2", "file:///path/to/sound2", 1.25),
+            new SoundPlayInfo("sound3", "file:///path/to/sound3", 1.25)
+        ]);
 
-        const soundPlayInfoManager = SoundPlayInfoManager.createFromRepository(sound, repository);
-        soundPlayInfoManager.playedTime = 2;
+        const repository = new MockRepository(soundPlayInfos);
+
+        const soundPlayInfoManager = SoundPlayInfoManager.createFromRepository(repository);
+        soundPlayInfoManager.get(0).playedTime = 125;
+        soundPlayInfoManager.get(1).playedTime = 225;
+        soundPlayInfoManager.get(2).playedTime = 325;
         soundPlayInfoManager.save();
-        assert.equal(soundPlayInfoManager.playedTime, 2);
-    });
 
-    it('load', () => {
-        const sound = new Sound("sound1", "file:///path/to/sound1");
-        const repository = new MockRepository(new SoundPlayInfos([
-            new SoundPlayInfo(sound, 1.25)
-        ]));
+        assert.equal(soundPlayInfoManager.length, 3);
 
-        const soundPlayInfoManager = SoundPlayInfoManager.createFromRepository(sound, repository);
-        repository.soundPlayInfos.getSoundPlayInfo(0).playedTime = 3;
-        soundPlayInfoManager.load();
-        assert.equal(soundPlayInfoManager.playedTime, 3);
+        assert.equal(soundPlayInfoManager.get(0).name, "sound1");
+        assert.equal(soundPlayInfoManager.get(0).url, "file:///path/to/sound1");
+        assert.equal(soundPlayInfoManager.get(0).playedTime, 125);
+
+        assert.equal(soundPlayInfoManager.get(1).name, "sound2");
+        assert.equal(soundPlayInfoManager.get(1).url, "file:///path/to/sound2");
+        assert.equal(soundPlayInfoManager.get(1).playedTime, 225);
+
+        assert.equal(soundPlayInfoManager.get(2).name, "sound3");
+        assert.equal(soundPlayInfoManager.get(2).url, "file:///path/to/sound3");
+        assert.equal(soundPlayInfoManager.get(2).playedTime, 325);
     });
 })
 

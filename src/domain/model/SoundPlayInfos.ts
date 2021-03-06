@@ -1,4 +1,3 @@
-import { Sound } from '../model/Sound';
 import { SoundPlayInfo } from '../model/SoundPlayInfo';
 
 export class SoundPlayInfos {
@@ -8,13 +7,13 @@ export class SoundPlayInfos {
       this.soundPlayInfos = soundPlayInfos;
   }
 
-  getSoundPlayInfo(index : number) : SoundPlayInfo {
+  get(index : number) : SoundPlayInfo {
       return this.soundPlayInfos[index];
   }
 
-  getSoundPlayInfoFromUrl(url :  string) : SoundPlayInfo|undefined {
+  getFromUrl(url : string) : SoundPlayInfo|undefined {
       return this.soundPlayInfos.find(soundPlayInfo => {
-          return soundPlayInfo.soundUrl === url;
+          return soundPlayInfo.url === url;
       });
   }
 
@@ -26,5 +25,4 @@ export class SoundPlayInfos {
       return this.soundPlayInfos.map(func);
   }
 }
-
 

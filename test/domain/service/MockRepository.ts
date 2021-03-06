@@ -1,5 +1,3 @@
-import { Sound } from '../../../src/domain/model/Sound';
-
 import { SoundPlayInfo } from '../../../src/domain/model/SoundPlayInfo';
 import { SoundPlayInfos } from '../../../src/domain/model/SoundPlayInfos';
 
@@ -12,12 +10,12 @@ export class MockRepository implements Repository {
         this.soundPlayInfos = soundPlayInfos;
     }
 
-    load(sound: Sound) : SoundPlayInfo|undefined {
-        return this.soundPlayInfos.getSoundPlayInfoFromUrl(sound.url);
+    load(sound: SoundPlayInfo) : SoundPlayInfo|undefined {
+        return this.soundPlayInfos.getFromUrl(sound.url);
     }
 
-    save(sound: Sound, playedTime: number) : void {
-        const soundPlayInfo = this.soundPlayInfos.getSoundPlayInfoFromUrl(sound.url);
+    save(sound: SoundPlayInfo, playedTime: number) : void {
+        const soundPlayInfo = this.soundPlayInfos.getFromUrl(sound.url);
         if (soundPlayInfo) {
             soundPlayInfo.playedTime = playedTime;
         } else {

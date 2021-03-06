@@ -1,48 +1,35 @@
-import { Sound } from '../model/Sound';
 import { SoundPlayInfo } from '../model/SoundPlayInfo';
+import { SoundPlayInfos } from '../model/SoundPlayInfos';
 import { Repository } from '../repository/Repository';
 
 export class SoundPlayInfoManager {
-  readonly soundPlayInfo: SoundPlayInfo;
+  readonly soundPlayInfos: SoundPlayInfos;
   readonly repository: Repository;
 
-  constructor(soundPlayInfo: SoundPlayInfo, repository: Repository) {
+  constructor(soundPlayInfos: SoundPlayInfos, repository: Repository) {
       this.repository = repository;
-      this.soundPlayInfo = soundPlayInfo;
+      this.soundPlayInfos = soundPlayInfos;
   }
 
-  get soundName(): string {
-      return this.soundPlayInfo.sound.name;
+  get(index: number): SoundPlayInfo {
+      return this.soundPlayInfos.get(index);
   }
 
-  get soundUrl():  string {
-      return this.soundPlayInfo.sound.url;
+  getFromUrl(url: string): SoundPlayInfo|undefined {
+      return this.soundPlayInfos.getFromUrl(url);
   }
 
-  get playedTime(): number {
-      return this.soundPlayInfo.playedTime;
-  }
-
-  set playedTime(playedTime: number) {
-      this.soundPlayInfo.playedTime = playedTime;
-  }
-
-  load(): void {
-      this.soundPlayInfo.playedTime = this.repository.load(this.soundPlayInfo.sound).playedTime;
+  get length(): number {
+      return this.soundPlayInfos.length;
   }
 
   save(): void {
-      this.repository.save(this.soundPlayInfo.sound, this.soundPlayInfo.playedTime);
+      this.repository.saveAll(this.soundPlayInfos);
   }
 
-  static createFromRepository(sound: Sound, repository: Repository) : SoundPlayInfoManager {
-      const soundPlayInfo = repository.load(sound);
-      if (soundPlayInfo) {
-          return new SoundPlayInfoManager(soundPlayInfo, repository);
-      } else {
-          throw new Error(`${sound}が見つかりませんでした。`);
-      }
+  static createFromRepository(repository: Repository) : SoundPlayInfoManager {
+      const soundPlayInfos = repository.loadAll();
+      return new SoundPlayInfoManager(soundPlayInfos, repository);
   }
-
 }
 
