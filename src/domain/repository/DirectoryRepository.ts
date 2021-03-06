@@ -7,9 +7,13 @@ import { SoundPlayInfos } from '../model/SoundPlayInfos';
 import { Repository } from '../repository/Repository';
 
 export class DirectoryRepository implements Repository {
-    soundPlayInfos: SoundPlayInfos;
+    readonly url: string;
+    readonly type: string = 'directory';
+    readonly soundPlayInfos: SoundPlayInfos;
 
     constructor(directory: string) {
+        this.url = 'file://' + path.resolve(directory);
+
         const children = fs.readdirSync(directory, {withFileTypes: true});
 
         const files = children.filter(child => child.isFile()).map(file => file.name);

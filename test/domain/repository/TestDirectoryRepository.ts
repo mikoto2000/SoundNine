@@ -8,8 +8,12 @@ import { DirectoryRepository } from '../../../src/domain/repository/DirectoryRep
 
 describe('DirectoryRepository.ts', () => {
     it('インスタンス化', () => {
-        const directoryRepository = new DirectoryRepository('./test/testdata/DirectoryRepository');
+        const directory = './test/testdata/DirectoryRepository';
+        const directoryRepository = new DirectoryRepository(directory);
         const absDirPath = path.resolve('./test/testdata/DirectoryRepository');
+
+        assert.equal(directoryRepository.type, 'directory');
+        assert.equal(directoryRepository.url, 'file://' + path.resolve(directory));
 
         const soundPlayInfos = directoryRepository.soundPlayInfos;
 

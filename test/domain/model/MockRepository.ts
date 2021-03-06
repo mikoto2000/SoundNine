@@ -10,6 +10,14 @@ export class MockRepository implements Repository {
         this.soundPlayInfos = soundPlayInfos;
     }
 
+    get url(): string {
+        return "mock";
+    }
+
+    get type(): string {
+        return 'mock';
+    }
+
     load(sound: SoundPlayInfo) : SoundPlayInfo|undefined {
         return this.soundPlayInfos.getFromUrl(sound.url);
     }
