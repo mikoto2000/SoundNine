@@ -52,5 +52,29 @@ describe('SoundPlayInfos.ts', () => {
         assert.equal(soundPlayInfos.getFromUrl("file:///path/to/sound3")?.playedTime, 3);
 
     });
+
+    it('map', () => {
+
+        const soundPlayInfos = new SoundPlayInfos([
+            new SoundPlayInfo("sound1", "file:///path/to/sound1", 1),
+            new SoundPlayInfo("sound2", "file:///path/to/sound2", 2),
+            new SoundPlayInfo("sound3", "file:///path/to/sound3", 3)
+        ]);
+
+        const expected = [
+            ["sound1", "file:///path/to/sound1", 1],
+            ["sound2", "file:///path/to/sound2", 2],
+            ["sound3", "file:///path/to/sound3", 3]
+        ];
+
+        const result = soundPlayInfos.map(soundPlayInfo => {
+            return [soundPlayInfo.name, soundPlayInfo.url, soundPlayInfo.playedTime];
+        });
+
+        assert.deepEqual(result[0], expected[0]);
+        assert.deepEqual(result[1], expected[1]);
+        assert.deepEqual(result[2], expected[2]);
+
+    });
 })
 
