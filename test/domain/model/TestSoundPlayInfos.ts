@@ -28,7 +28,29 @@ describe('SoundPlayInfos.ts', () => {
         assert.equal(soundPlayInfos.get(2).playedTime, 3);
 
     });
+
+    it('getFromUrl', () => {
+
+        const soundPlayInfos = new SoundPlayInfos([
+            new SoundPlayInfo("sound1", "file:///path/to/sound1", 1),
+            new SoundPlayInfo("sound2", "file:///path/to/sound2", 2),
+            new SoundPlayInfo("sound3", "file:///path/to/sound3", 3)
+        ]);
+
+        assert.equal(soundPlayInfos.length, 3);
+
+        assert.equal(soundPlayInfos.getFromUrl("file:///path/to/sound1")?.name, "sound1");
+        assert.equal(soundPlayInfos.getFromUrl("file:///path/to/sound1")?.url, "file:///path/to/sound1");
+        assert.equal(soundPlayInfos.getFromUrl("file:///path/to/sound1")?.playedTime, 1);
+
+        assert.equal(soundPlayInfos.getFromUrl("file:///path/to/sound2")?.name, "sound2");
+        assert.equal(soundPlayInfos.getFromUrl("file:///path/to/sound2")?.url, "file:///path/to/sound2");
+        assert.equal(soundPlayInfos.getFromUrl("file:///path/to/sound2")?.playedTime, 2);
+
+        assert.equal(soundPlayInfos.getFromUrl("file:///path/to/sound3")?.name, "sound3");
+        assert.equal(soundPlayInfos.getFromUrl("file:///path/to/sound3")?.url, "file:///path/to/sound3");
+        assert.equal(soundPlayInfos.getFromUrl("file:///path/to/sound3")?.playedTime, 3);
+
+    });
 })
-
-
 
