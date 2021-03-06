@@ -2,7 +2,7 @@ import { SoundPlayInfo } from '../model/SoundPlayInfo';
 import { SoundPlayInfos } from '../model/SoundPlayInfos';
 import { Repository } from '../repository/Repository';
 
-export class SoundPlayInfoManager {
+export class DataSource {
   readonly soundPlayInfos: SoundPlayInfos;
   readonly repository: Repository;
 
@@ -27,9 +27,9 @@ export class SoundPlayInfoManager {
       this.repository.saveAll(this.soundPlayInfos);
   }
 
-  static createFromRepository(repository: Repository) : SoundPlayInfoManager {
+  static createFromRepository(repository: Repository) : DataSource {
       const soundPlayInfos = repository.loadAll();
-      return new SoundPlayInfoManager(soundPlayInfos, repository);
+      return new DataSource(soundPlayInfos, repository);
   }
 }
 
